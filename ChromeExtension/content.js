@@ -16,3 +16,11 @@ for (var j = 0; j < row.length; j++) {
     // Deleting the ith cell of each row.
     row[j].deleteCell(i);
 }
+
+//width
+//https://www.w3schools.com/js/js_htmldom_css.asp
+mainTable.style.width = "100%"
+
+//script at end of body so stuff loads before execution
+//https://stackoverflow.com/questions/30653081/why-scripts-at-the-end-of-body-tag
+
