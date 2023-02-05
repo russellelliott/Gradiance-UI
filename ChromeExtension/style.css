@@ -1,3 +1,14 @@
 /*tr td:nth-child(5) {
   background: #ccc;
 }*/
+
+/*
+https://stackoverflow.com/questions/3942254/how-to-specify-font-attributes-for-all-elements-on-an-html-web-page
+*/
+
+* {
+  font-size: 100%;
+  font-family: Arial;
+ }
+
+/*https://www.w3schools.com/css/css_font.asp*/
