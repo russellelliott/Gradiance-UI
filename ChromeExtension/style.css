@@ -15,4 +15,6 @@ https://stackoverflow.com/questions/3942254/how-to-specify-font-attributes-for-a
 /*https://www.w3schools.com/css/tryit.asp?filename=trycss_font-family*/
 font{
   font-family: "Lucida Console", "Courier New", monospace;
+  color: darkblue;
+  font-weight: 900;
 }
