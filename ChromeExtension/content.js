@@ -29,6 +29,14 @@ mainTable.style.width = "100%"
 for (const a of document.querySelectorAll("b")) {
     if (a.textContent.includes("Help")) {
         console.log(a.textContent); //get text
-        a.outerHTML += "<br> <a class = 'branding' href = 'https://github.com/russellelliott/Gradiance-UI'>Source Code</a>";
+        //multiline string
+        //https://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
+        a.outerHTML +=
+        `
+        <br>
+        <p></p>
+        <a class = 'branding' href = 'https://github.com/russellelliott/Gradiance-UI'>UI Improvement Source Code</a>
+        `;
+        //a.outerHTML += "<br> <a class = 'branding' href = 'https://github.com/russellelliott/Gradiance-UI'>Source Code</a>";
     }
 }
