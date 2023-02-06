@@ -22,10 +22,21 @@ font{
 /*table styling*/
 /*https://www.w3schools.com/css/css_table.asp*/
 table, td, th {
-  border: 1px solid;
+  border: 0px transparent;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+}
+
+/*custom styling for table*/
+.mystyle table, td, th{
+  /*width: 100%;
+  padding: 25px;
+  background-color: coral;
+  color: white;
+  font-size: 25px;
+  box-sizing: border-box;*/
+  /*border: 1px solid;*/
 }
