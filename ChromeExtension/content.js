@@ -23,3 +23,12 @@ mainTable.style.width = "100%"
 
 //script at end of body so stuff loads before execution
 //https://stackoverflow.com/questions/30653081/why-scripts-at-the-end-of-body-tag
+
+//https://stackoverflow.com/questions/3813294/how-to-get-element-by-innertext
+
+for (const a of document.querySelectorAll("b")) {
+    if (a.textContent.includes("Help")) {
+        console.log(a.textContent); //get text
+        a.outerHTML += "<br> <a class = 'branding' href = 'https://github.com/russellelliott/Gradiance-UI'>Source Code</a>";
+    }
+}
