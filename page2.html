@@ -30,6 +30,7 @@ Gradiance Online Accelerated Learning
 a {text-decoration: none;}
 -->
 </style>
+</style>
 </head>
 <body class="bodybackground" style="margin-top: 0; margin-left: 0; margin-bottom: 4px; margin-right: 4px">
 <table border="0" cellpadding="0" cellspacing="0" width="875px" style="height: 100%">
@@ -189,7 +190,7 @@ Gradiance Online Accelerated Learning
 <tr>
 <td align="center" class="bigfont" style="color: #003399">
 <b>
-CSE 180 Winter 2023 #2
+CSE 180 Winter 2023 #3
 </b>
 </td>
 </tr>
@@ -238,7 +239,7 @@ CSE 180 Winter 2023 #2
 <table border="0" cellpadding="0" cellspacing="2" width="100%" align="center">
 <tr>
 <td>
-More advanced SQL
+Joins, GROUP BY, Aggregates, HAVING, Modifications, Transactions
 </td>
 </tr>
 </table>
@@ -263,7 +264,7 @@ is given as NULL if either the team did not play, or will play on that day
 but the game is not yet concluded.
 The data in this table is as follows:
 <P>
-<CENTER><TABLE bgcolor="floralwhite" border="5">
+<CENTER><TABLE bgcolor="palevioletred" border="5">
 <TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
 <TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
 <TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
@@ -279,18 +280,27 @@ The data in this table is as follows:
 <TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
 </table></center>
 <P>
-What is the result of executing on this data the query:
+Consider the following three queries, which differ only in the team
+mentioned in the WHERE clause.
 <P>
-<FONT color="green">
+<FONT color="red">
 <PRE>
-     SELECT Team, Day
+1)   SELECT COUNT(*), COUNT(Runs)
      FROM Scores
-     WHERE Opponent IS NULL OR
-         NOT (Runs &gt;= 0)
+     WHERE Team = 'Tigers'
+
+2)   SELECT COUNT(*), COUNT(Runs)
+     FROM Scores
+     WHERE Team = 'Carp'
+
+3)   SELECT COUNT(*), COUNT(Runs)
+     FROM Scores
+     WHERE Team = 'Swallows'
 </pre>
 </font>
 <P>
-Identify, in the list below, a row of the result.
+Then, identify in the list below the result of
+one of these queries.
 
 </td>
 <td width="5%">
@@ -310,9 +320,9 @@ Identify, in the list below, a row of the result.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="navajowhite" border="5">
-<TR><TD width="100">Carp</TD><TD width="70">Monday</TD></TR>
-</table></center>
+For the Carp: <TABLE bgcolor="beige" border="5">
+<TR><TD width="30">2</TD><TD width="50">0</TD></TR>
+</table>
 
 </td>
 </tr>
@@ -327,9 +337,9 @@ Identify, in the list below, a row of the result.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="navajowhite" border="5">
-<TR><TD width="100">Tigers</TD><TD width="70">Sunday</TD></TR>
-</table></center>
+For the Tigers: <TABLE bgcolor="beige" border="5">
+<TR><TD width="30">1</TD><TD width="50">1</TD></TR>
+</table>
 
 </td>
 </tr>
@@ -344,9 +354,9 @@ Identify, in the list below, a row of the result.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="navajowhite" border="5">
-<TR><TD width="100">Giants</TD><TD width="70">Sunday</TD></TR>
-</table></center>
+For the Swallows: <TABLE bgcolor="beige" border="5">
+<TR><TD width="30">12</TD><TD width="50">12</TD></TR>
+</table>
 
 </td>
 </tr>
@@ -361,9 +371,9 @@ Identify, in the list below, a row of the result.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="navajowhite" border="5">
-<TR><TD width="100">Swallows</TD><TD width="70">Sunday</TD></TR>
-</table></center>
+For the Tigers: <TABLE bgcolor="beige" border="5">
+<TR><TD width="30">12</TD><TD width="50">2</TD></TR>
+</table>
 
 </td>
 </tr>
@@ -377,39 +387,28 @@ Identify, in the list below, a row of the result.
 </b>
 </td>
 <td align="left">
-The table
+Suppose we have a relation with schema
 <P>
-Scores(Team, Day, Opponent, Runs)
-<P>
-Contains the following 12 rows:
-<P>
-<TABLE bgcolor="beige" border="5">
-<TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
-<TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
-<TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
-<TR><TD>Carp</TD><TD>Sunday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Swallows</TD><TD>Sunday</TD><TD>Dragons</TD><TD>7</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Sunday</TD><TD>Tigers</TD><TD>2</TD></TR>
-<TR><TD>Giants</TD><TD>Sunday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Dragons</TD><TD>Monday</TD><TD>Carp</TD><TD>NULL</TD></TR>
-<TR><TD>Tigers</TD><TD>Monday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Carp</TD><TD>Monday</TD><TD>Dragons</TD><TD>NULL</TD></TR>
-<TR><TD>Swallows</TD><TD>Monday</TD><TD>Giants</TD><TD>0</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Monday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
-</table>
-<P>
-What is the result of the following query?
-<P>
-<FONT color="green">
+<FONT color="blue">
 <PRE>
-     SELECT *
-     FROM Scores
-     ORDER BY Runs DESC, Team ASC
+     R(A, B, C, D, E)
 </pre>
 </font>
 <P>
-Identify in the list below a tuple and the correct order in which it appears.
+If we issue a query of the form
+<P>
+<FONT color="blue">
+<PRE>
+     SELECT ...
+     FROM R
+     WHERE ...
+     GROUP BY B, E
+     HAVING ???
+</pre>
+</font>
+<P>
+What terms can appear in the HAVING condition (represented by ??? in the above query)?
+Identify, in the list below, the term that CAN NOT appear.
 
 </td>
 <td width="5%">
@@ -429,14 +428,8 @@ Identify in the list below a tuple and the correct order in which it appears.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="paleturquoise" border="1">
-<TR><TD align="center" width="100px">Tigers</TD><TD align="center" width="100px">Sunday</TD><TD align="center" width="100px">Bay Stars</TD><TD align="center" width="50px">9</TD></TR>
-</table>
-must appear first.
-
+SUM(D)
 </td>
-</tr>
-<tr valign="top">
 <td width="5%">
 &nbsp;
 </td>
@@ -447,14 +440,8 @@ must appear first.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="paleturquoise" border="1">
-<TR><TD align="center" width="100px">Carp</TD><TD align="center" width="100px">Monday</TD><TD align="center" width="100px">Dragons</TD><TD align="center" width="50px">NULL</TD></TR>
-</table>
-must appear ninth.
-
+AVG(A)
 </td>
-</tr>
-<tr valign="top">
 <td width="5%">
 &nbsp;
 </td>
@@ -465,14 +452,8 @@ must appear ninth.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="paleturquoise" border="1">
-<TR><TD align="center" width="100px">Dragons</TD><TD align="center" width="100px">Sunday</TD><TD align="center" width="100px">Swallows</TD><TD align="center" width="50px">4</TD></TR>
-</table>
-must appear ninth.
-
+D
 </td>
-</tr>
-<tr valign="top">
 <td width="5%">
 &nbsp;
 </td>
@@ -483,11 +464,7 @@ must appear ninth.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="paleturquoise" border="1">
-<TR><TD align="center" width="100px">Tigers</TD><TD align="center" width="100px">Sunday</TD><TD align="center" width="100px">Bay Stars</TD><TD align="center" width="50px">9</TD></TR>
-</table>
-must appear seventh.
-
+B*E
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -500,49 +477,45 @@ must appear seventh.
 </b>
 </td>
 <td align="left">
-The table
+Here are three relations, R(A,B), S(C,D), and T(E,F).  Their current values are:
 <P>
-Scores(Team, Day, Opponent, Runs)
+<CENTER><TABLE>
+<TR><TH>R</th><TH>S</th><TH>T</th></tr>
+<TR>
+<TD><TABLE bgcolor="palegoldenrod" BORDER = 5>
+<TR><TH>A</th><TH>B</th></tr>
+<TR><TD>0</td><TD>1</td></tr>
+<TR><TD>1</td><TD>0</td></tr>
+<TR><TD>1</td><TD>1</td></tr>
+</table></td>
+<TD><TABLE bgcolor="palegoldenrod" BORDER = 5>
+<TR><TH>C</th><TH>D</th></tr>
+<TR><TD>0</td><TD>1</td></tr>
+<TR><TD>1</td><TD>0</td></tr>
+<TR><TD>1</td><TD>1</td></tr>
+</table></td>
+<TD><TABLE bgcolor="palegoldenrod" BORDER = 5>
+<TR><TH>E</th><TH>F</th></tr>
+<TR><TD>0</td><TD>1</td></tr>
+<TR><TD>1</td><TD>0</td></tr>
+<TR><TD>1</td><TD>1</td></tr>
+</table></td>
+</tr>
+</table></center>
 <P>
-Gives the scores in the Japanese Baseball League for two consecutive days.
-The data in this table is as follows:
+Compute the result of the query:
 <P>
-<TABLE bgcolor="beige" border="5">
-<TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
-<TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
-<TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
-<TR><TD>Carp</TD><TD>Sunday</TD><TD>Giants</TD><TD>2</TD></TR>
-<TR><TD>Swallows</TD><TD>Sunday</TD><TD>Dragons</TD><TD>7</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Sunday</TD><TD>Tigers</TD><TD>2</TD></TR>
-<TR><TD>Giants</TD><TD>Sunday</TD><TD>Carp</TD><TD>4</TD></TR>
-<TR><TD>Dragons</TD><TD>Monday</TD><TD>Carp</TD><TD>6</TD></TR>
-<TR><TD>Tigers</TD><TD>Monday</TD><TD>Bay Stars</TD><TD>5</TD></TR>
-<TR><TD>Carp</TD><TD>Monday</TD><TD>Dragons</TD><TD>3</TD></TR>
-<TR><TD>Swallows</TD><TD>Monday</TD><TD>Giants</TD><TD>0</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Monday</TD><TD>Tigers</TD><TD>7</TD></TR>
-<TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
-</table>
-<P>
-Determine the result of the query
-<P>
-<FONT color="purple">
+<FONT color="red">
 <PRE>
-     SELECT Team, Day
-     FROM Scores S1
-     WHERE Runs &lt;= ALL
-         (SELECT Runs FROM Scores S2
-          WHERE S1.Day = S2.Day
-         )
+     SELECT A, F, SUM(C), SUM(D)
+     FROM R, S, T
+     WHERE B = C AND D = E
+     GROUP BY A, F
+     HAVING COUNT(*) &gt; 1
 </pre>
 </font>
 <P>
-Then, identify, in the list below, one of the rows of the result.
-one of these queries.
-<P>
-Hint: When trying to understand what a query does, it is often easiest to
-work "inside-out." That is, first understand the subquery.  Notice that the
-subquery in this problem has an "input," S1.Day, that is determined outside the
-subquery, and depends on which row of scores the alias variable S1 refers to.
+Identify, in the list below, the row that appears in the result.
 
 </td>
 <td width="5%">
@@ -562,10 +535,7 @@ subquery, and depends on which row of scores the alias variable S1 refers to.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="navajowhite" border="1">
-<TR><TD align="center" width="80px">Carp</TD><TD align="center" width="80px">Sunday</TD></TR>
-</table>
-
+(1,0,1,2)
 </td>
 </tr>
 <tr valign="top">
@@ -579,10 +549,7 @@ subquery, and depends on which row of scores the alias variable S1 refers to.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="navajowhite" border="1">
-<TR><TD align="center" width="80px">Bay Stars</TD><TD align="center" width="80px">Monday</TD></TR>
-</table>
-
+(1,0,2,2)
 </td>
 </tr>
 <tr valign="top">
@@ -596,10 +563,7 @@ subquery, and depends on which row of scores the alias variable S1 refers to.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="navajowhite" border="1">
-<TR><TD align="center" width="80px">Giants</TD><TD align="center" width="80px">Sunday</TD></TR>
-</table>
-
+(0,1,1,2)
 </td>
 </tr>
 <tr valign="top">
@@ -613,10 +577,7 @@ subquery, and depends on which row of scores the alias variable S1 refers to.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="navajowhite" border="1">
-<TR><TD align="center" width="80px">Giants</TD><TD align="center" width="80px">Monday</TD></TR>
-</table>
-
+(1,1,1,1)
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -629,52 +590,15 @@ subquery, and depends on which row of scores the alias variable S1 refers to.
 </b>
 </td>
 <td align="left">
-The table
-<P>
-Scores(Team, Day, Opponent, Runs)
-<P>
-Gives the scores in the Japanese Baseball League for two consecutive days.
-The data in this table is as follows:
-<P>
-<TABLE bgcolor="blanchedalmond" border="5">
-<TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
-<TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
-<TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
-<TR><TD>Carp</TD><TD>Sunday</TD><TD>Giants</TD><TD>2</TD></TR>
-<TR><TD>Swallows</TD><TD>Sunday</TD><TD>Dragons</TD><TD>7</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Sunday</TD><TD>Tigers</TD><TD>2</TD></TR>
-<TR><TD>Giants</TD><TD>Sunday</TD><TD>Carp</TD><TD>4</TD></TR>
-<TR><TD>Dragons</TD><TD>Monday</TD><TD>Carp</TD><TD>6</TD></TR>
-<TR><TD>Tigers</TD><TD>Monday</TD><TD>Bay Stars</TD><TD>5</TD></TR>
-<TR><TD>Carp</TD><TD>Monday</TD><TD>Dragons</TD><TD>3</TD></TR>
-<TR><TD>Swallows</TD><TD>Monday</TD><TD>Giants</TD><TD>0</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Monday</TD><TD>Tigers</TD><TD>7</TD></TR>
-<TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
-</table>
-<P>
-Determine the result of the query
-<P>
-<FONT color="brown">
-<PRE>
-     SELECT Team, Day
-     FROM Scores S1
-     WHERE NOT EXISTS
-         (SELECT * FROM Scores S2
-          WHERE S1.Runs = S2.Runs AND
-              (S1.Team &lt;&gt; S2.Team 
-               OR S1.Day &lt;&gt; S2.Day)
-         )
-</pre>
+Consider the following transactions:<br>
+<FONT color="red">
+<ul>
+<li> S: [X := X + 10; Y := Y - 10]</li>
+<li> T: [X := X * 2; Y := Y * 2]</li>
+<li> U: [Y := Y + 10; X := X - 10]</li>
+</ul>
 </font>
-<P>
-Then, identify, in the list below, one of the rows of the result.
-<P>
-Hint: When trying to understand what a query does, it is often easiest to
-work "inside-out." That is, first understand the subquery.  Notice that the
-subquery in this problem has "inputs" S1.Day, S1.Runs, and S1.Team
-that are determined outside the
-subquery and depend on which row of scores the alias variable S1 refers to.
-
+Assuming initial values of X = 15 and Y = 25, serializable schedules of these three transactions can leave the database in various states.  Determine all such possible states.  Then, identify from the list below, which of the following is a possible state of the database resulting from a serializable execution of S, T and U.
 </td>
 <td width="5%">
 &nbsp;
@@ -693,10 +617,7 @@ subquery and depend on which row of scores the alias variable S1 refers to.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="palegreen" border="1">
-<TR><TD align="center" width="80px">Tigers</TD><TD align="center" width="80px">Monday</TD></TR>
-</table>
-
+X = 20; Y = 50
 </td>
 </tr>
 <tr valign="top">
@@ -710,10 +631,7 @@ subquery and depend on which row of scores the alias variable S1 refers to.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="palegreen" border="1">
-<TR><TD align="center" width="80px">Carp</TD><TD align="center" width="80px">Monday</TD></TR>
-</table>
-
+X = 20; Y = 60
 </td>
 </tr>
 <tr valign="top">
@@ -727,10 +645,7 @@ subquery and depend on which row of scores the alias variable S1 refers to.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="palegreen" border="1">
-<TR><TD align="center" width="80px">Giants</TD><TD align="center" width="80px">Monday</TD></TR>
-</table>
-
+X = 30; Y = 40
 </td>
 </tr>
 <tr valign="top">
@@ -744,10 +659,7 @@ subquery and depend on which row of scores the alias variable S1 refers to.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<TABLE bgcolor="palegreen" border="1">
-<TR><TD align="center" width="80px">Dragons</TD><TD align="center" width="80px">Sunday</TD></TR>
-</table>
-
+X = 20; Y = 40
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -760,41 +672,22 @@ subquery and depend on which row of scores the alias variable S1 refers to.
 </b>
 </td>
 <td align="left">
-The latest scores from the Japanese Baseball League are in the table
-with schema
-<P>
-Scores(Team, Opponent, RunsFor, RunsAgainst)
-<P>
-The data in this table is as follows:
-<P>
-<CENTER><TABLE bgcolor="powderblue" border="5">
-<TR><TH>Team</TH><TH>Opponent</TH><TH>RunsFor</TH><TH>RunsAgainst</TH></TR>
-<TR><TD>Dragons</TD><TD>Tigers</TD><TD>5</TD><TD>3</TD></TR>
-<TR><TD>Carp</TD><TD>Swallows</TD><TD>4</TD><TD>6</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Giants</TD><TD>2</TD><TD>1</TD></TR>
-<TR><TD>Marines</TD><TD>Hawks</TD><TD>5</TD><TD>3</TD></TR>
-<TR><TD>Ham Fighters</TD><TD>Buffaloes</TD><TD>1</TD><TD>6</TD></TR>
-<TR><TD>Lions</TD><TD>Golden Eagles</TD><TD>8</TD><TD>12</TD></TR>
-<TR><TD>Tigers</TD><TD>Dragons</TD><TD>3</TD><TD>5</TD></TR>
-<TR><TD>Swallows</TD><TD>Carp</TD><TD>6</TD><TD>4</TD></TR>
-<TR><TD>Giants</TD><TD>Bay Stars</TD><TD>1</TD><TD>2</TD></TR>
-<TR><TD>Hawks</TD><TD>Marines</TD><TD>3</TD><TD>5</TD></TR>
-<TR><TD>Buffaloes</TD><TD>Ham Fighters</TD><TD>6</TD><TD>1</TD></TR>
-<TR><TD>Golden Eagles</TD><TD>Lions</TD><TD>12</TD><TD>8</TD></TR>
-</table></center>
-<P>
-What is the result of executing on this data the query:
-<P>
-<FONT color="brown">
-<PRE>
-     SELECT *
-     FROM Scores
-     WHERE RunsFor &gt; 5
-</pre>
-</font>
-<P>
-Identify in the list below, a row in the result.
-
+Consider the following database schema and the five queries labelled Q<sub>1</sub>,...,Q<sub>5</sub>. Assume that all movies released in any given year have distinct titles
+<table>
+<tr><td>movie(title, year, length, in_color, studio_name, producer_name)</td></tr>
+<tr><td>stars_in(movie_title, movie_year,star_name)</td></tr>
+<tr><td>movie_star(name, address, gender, birthdate)</td></tr>
+<tr><td>movie_producer(name, address, net_worth)</td></tr>.
+<tr><td>studio(name, address)</td></tr>
+</table>
+<table>
+<tr><td>Q<sub>1</sub>:</td><td>Who were the male stars in <i>Terms of Endearment</i> released in 1983?</td></tr>
+<tr><td>Q<sub>2</sub>:</td><td>Which movies are longer than <i>Gone  With the Wind</i></td></tr>
+<tr><td>Q<sub>3</sub>:</td><td>Find the titles which have been used for two or more movies?</td></tr>
+<tr><td>Q<sub>4</sub>:</td><td>Find the producers of <i>Harrison Ford</i>'s movies.</td></tr>
+<tr><td>Q<sub>5</sub>:</td><td>Find the total length of all movies for only those producers who made at least one film prior to 1930.</td></tr>
+</table>
+Identify the correct SQL statement corresponding to these queries.
 </td>
 <td width="5%">
 &nbsp;
@@ -813,10 +706,7 @@ Identify in the list below, a row in the result.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="lemonchiffon" border="5">
-<TR><TD width="30">12</TD></TR>
-</table></center>
-
+<tr><td>Q<sub>1</sub>:</td> <td><pre>SELECT name<br>FROM stars_in, movie_star<br>WHERE movie_title = 'Terms of Endearment' AND gender = 'Male'<br>movie_year = 1983</pre></td></tr>
 </td>
 </tr>
 <tr valign="top">
@@ -830,10 +720,7 @@ Identify in the list below, a row in the result.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="lemonchiffon" border="5">
-<TR><TD width="140">Dragons</TD><TD width="140">Tigers</TD><TD width="30">5</TD><TD width="30">3</TD></TR>
-</table></center>
-
+<tr><td>Q<sub>2</sub>:</td><td><pre>SELECT title<br>FROM movie<br>WHERE length > ALL (SELECT length<br>                    FROM movie<br>                    WHERE title = 'Gone With the Wind')</pre></td><tr>
 </td>
 </tr>
 <tr valign="top">
@@ -847,10 +734,7 @@ Identify in the list below, a row in the result.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="lemonchiffon" border="5">
-<TR><TD width="140">Swallows</TD><TD width="140">Carp</TD><TD width="30">4</TD></TR>
-</table></center>
-
+<tr><td>Q<sub>5</sub>:</td><td><pre>SELECT producer_name, SUM(length)<br>FROM movie<br>WHERE MIN(year) < 1930</pre></td></tr>
 </td>
 </tr>
 <tr valign="top">
@@ -864,10 +748,7 @@ Identify in the list below, a row in the result.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="lemonchiffon" border="5">
-<TR><TD width="140">Buffaloes</TD><TD width="140">Ham Fighters</TD><TD width="30">6</TD><TD width="30">1</TD></TR>
-</table></center>
-
+<tr><td>Q<sub>2</sub>:</td><td><pre>SELECT movie.title<br>FROM movie,movie AS mov<br>WHERE mov.title = 'Gone With the Wind' AND movie.length < mov.length</pre></td></tr>
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -880,39 +761,25 @@ Identify in the list below, a row in the result.
 </b>
 </td>
 <td align="left">
-Here are two relations, R(A,B) and S(C,D).  Their current values are:
+Suppose relation R(A,B) has the tuples:
 <P>
-<CENTER><TABLE>
-<TR><TD>R = </TD><TD>
-<TD><TABLE bgcolor="floralwhite" BORDER = 5>
+<CENTER><TABLE bgcolor="palegoldenrod" BORDER = 5>
 <TR><TH>A</th><TH>B</th></tr>
 <TR><TD>1</td><TD>2</td></tr>
 <TR><TD>3</td><TD>4</td></tr>
 <TR><TD>5</td><TD>6</td></tr>
-<TR><TD>7</td><TD>8</td></tr>
-</table></td><TD>S = </TD><TD>
-<TD><TABLE bgcolor="floralwhite" BORDER = 5>
-<TR><TH>C</th><TH>D</th></tr>
-<TR><TD>2</td><TD>10</td></tr>
-<TR><TD>4</td><TD>12</td></tr>
-<TR><TD>6</td><TD>14</td></tr>
-<TR><TD>8</td><TD>16</td></tr>
-</table></td>
-</tr>
 </table></center>
 <P>
-Compute the result of the query:
+and the relation S(B,C,D) has tuples:
 <P>
-<FONT color="blue">
-<PRE>
-     SELECT A, D
-     FROM R, S
-     WHERE B+C = 10
-</pre>
-</font>
+<CENTER><TABLE bgcolor="palegoldenrod" BORDER = 5>
+<TR><TH>B</th><TH>C</th><TH>D</th></tr>
+<TR><TD>2</td><TD>4</td><TD>6</td></tr>
+<TR><TD>4</td><TD>6</td><TD>8</td></tr>
+<TR><TD>4</td><TD>7</td><TD>9</td></tr>
+</table></center>
 <P>
-Identify, in the list below, the row that appears in the result.
-
+Compute the natural join of R and S.  Then, identify which of the following tuples is in the natural join R |&gt;&lt;| S.  You may assume each tuple has schema (A,B,C,D).
 </td>
 <td width="5%">
 &nbsp;
@@ -931,8 +798,10 @@ Identify, in the list below, the row that appears in the result.
 &nbsp;a)&nbsp;
 </td>
 <td>
-(5,10)
+(3,4,6,8)
 </td>
+</tr>
+<tr valign="top">
 <td width="5%">
 &nbsp;
 </td>
@@ -943,8 +812,10 @@ Identify, in the list below, the row that appears in the result.
 &nbsp;b)&nbsp;
 </td>
 <td>
-(3,10)
+(5,6,7,8)
 </td>
+</tr>
+<tr valign="top">
 <td width="5%">
 &nbsp;
 </td>
@@ -955,8 +826,10 @@ Identify, in the list below, the row that appears in the result.
 &nbsp;c)&nbsp;
 </td>
 <td>
-(7,16)
+(3,4,2,6)
 </td>
+</tr>
+<tr valign="top">
 <td width="5%">
 &nbsp;
 </td>
@@ -967,7 +840,7 @@ Identify, in the list below, the row that appears in the result.
 &nbsp;d)&nbsp;
 </td>
 <td>
-(7,10)
+(1,4,6,8)
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -980,41 +853,14 @@ Identify, in the list below, the row that appears in the result.
 </b>
 </td>
 <td align="left">
-The table
-<P>
-Scores(Team, Day, Opponent, Runs)
-<P>
-Contains the following 12 rows:
-<P>
-<CENTER><TABLE bgcolor="navajowhite" border="5">
-<TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
-<TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
-<TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
-<TR><TD>Carp</TD><TD>Sunday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Swallows</TD><TD>Sunday</TD><TD>Dragons</TD><TD>7</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Sunday</TD><TD>Tigers</TD><TD>2</TD></TR>
-<TR><TD>Giants</TD><TD>Sunday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Dragons</TD><TD>Monday</TD><TD>Carp</TD><TD>NULL</TD></TR>
-<TR><TD>Tigers</TD><TD>Monday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Carp</TD><TD>Monday</TD><TD>Dragons</TD><TD>NULL</TD></TR>
-<TR><TD>Swallows</TD><TD>Monday</TD><TD>Giants</TD><TD>0</TD></TR>
-<TR><TD>Bay Stars</TD><TD>Monday</TD><TD>NULL</TD><TD>NULL</TD></TR>
-<TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
-</table></center>
-<P>
-What is the result of the following query?
-<P>
-<FONT color="green">
-<PRE>
-     SELECT S1.Team, S2.Team
-     FROM Scores S1, Scores S2
-     WHERE S1.Opponent = S2.Opponent
-         AND S1.Team &lt;&gt; S2.Team
-</pre>
-</font>
-<P>
-Identify in the list below a tuple of the result.
+Relation R has schema:<p>
+CREATE TABLE R (<br>
+a INT PRIMARY KEY,<br>
+b INT DEFAULT 10,<br>
+c INT NOT NULL<br>
+);<p>
 
+R is currently empty. Which of the following INSERT statements is allowable?
 </td>
 <td width="5%">
 &nbsp;
@@ -1033,10 +879,7 @@ Identify in the list below a tuple of the result.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="paleturquoise" border="5">
-<TR><TD width="80">Swallows</TD><TD width="80">Carp</TD></TR>
-</table></center>
-
+INSERT INTO R VALUES(7,8,NOT NULL);
 </td>
 </tr>
 <tr valign="top">
@@ -1050,10 +893,7 @@ Identify in the list below a tuple of the result.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="paleturquoise" border="5">
-<TR><TD width="80">Bay Stars</TD><TD width="80">Bay Stars</TD></TR>
-</table></center>
-
+INSERT INTO R(a) VALUES(10);
 </td>
 </tr>
 <tr valign="top">
@@ -1067,10 +907,7 @@ Identify in the list below a tuple of the result.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="paleturquoise" border="5">
-<TR><TD width="80">Carp</TD><TD width="80">Tigers</TD></TR>
-</table></center>
-
+INSERT INTO R(b,c) VALUES(6,1);
 </td>
 </tr>
 <tr valign="top">
@@ -1084,10 +921,7 @@ Identify in the list below a tuple of the result.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<CENTER><TABLE bgcolor="paleturquoise" border="5">
-<TR><TD width="80">Dragons</TD><TD width="80">Dragons</TD></TR>
-</table></center>
-
+INSERT INTO R(c,a) VALUES(3,1);
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -1100,17 +934,43 @@ Identify in the list below a tuple of the result.
 </b>
 </td>
 <td align="left">
-For what values of <I>x</I>, <I>y</I>, and <I>z</I>, including NULL, does the boolean
-expression
+The table
 <P>
-<FONT color="blue">
+Scores(Team, Day, Opponent, Runs)
+<P>
+Gives the scores in the Japanese Baseball League for two consecutive days.
+The Opponent is NULL if the Team did not play on that day.  The number of Runs
+is given as NULL if either the team did not play, or will play on that day
+but the game is not yet concluded.
+The data in this table is as follows:
+<P>
+<CENTER><TABLE bgcolor="blanchedalmond" border="5">
+<TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
+<TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
+<TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
+<TR><TD>Carp</TD><TD>Sunday</TD><TD>NULL</TD><TD>NULL</TD></TR>
+<TR><TD>Swallows</TD><TD>Sunday</TD><TD>Dragons</TD><TD>7</TD></TR>
+<TR><TD>Bay Stars</TD><TD>Sunday</TD><TD>Tigers</TD><TD>2</TD></TR>
+<TR><TD>Giants</TD><TD>Sunday</TD><TD>NULL</TD><TD>NULL</TD></TR>
+<TR><TD>Dragons</TD><TD>Monday</TD><TD>Carp</TD><TD>NULL</TD></TR>
+<TR><TD>Tigers</TD><TD>Monday</TD><TD>NULL</TD><TD>NULL</TD></TR>
+<TR><TD>Carp</TD><TD>Monday</TD><TD>Dragons</TD><TD>NULL</TD></TR>
+<TR><TD>Swallows</TD><TD>Monday</TD><TD>Giants</TD><TD>0</TD></TR>
+<TR><TD>Bay Stars</TD><TD>Monday</TD><TD>NULL</TD><TD>NULL</TD></TR>
+<TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
+</table></center>
+<P>
+What is the result of the following query?
+<P>
+<FONT color="red">
 <PRE>
-     x &lt;= 3 AND (y &gt;= 1 OR z = 5)
+     SELECT Opponent, COUNT(*), AVG(Runs)
+     FROM Scores
+     GROUP BY Opponent
 </pre>
 </font>
 <P>
-have the truth value TRUE?
-Identify one of those values from the list below.
+Then, identify in the list below one of the tuples in the result.
 
 </td>
 <td width="5%">
@@ -1130,7 +990,10 @@ Identify one of those values from the list below.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<I>x</I> = NULL, <I>y</I> = 1, <I>z</I> = 5.
+<CENTER><TABLE bgcolor="lightseagreen" border="5">
+<TR><TD width="100">Carp</TD><TD width="30">8</TD><TD width="50">4.333</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr valign="top">
@@ -1144,7 +1007,10 @@ Identify one of those values from the list below.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<I>x</I> = 4, <I>y</I> = 0, <I>z</I> = 5.
+<CENTER><TABLE bgcolor="lightseagreen" border="5">
+<TR><TD width="100">Tigers</TD><TD width="30">8</TD><TD width="50">4.333</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr valign="top">
@@ -1158,7 +1024,10 @@ Identify one of those values from the list below.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<I>x</I> = 2, <I>y</I> = -1, <I>z</I> = NULL.
+<CENTER><TABLE bgcolor="lightseagreen" border="5">
+<TR><TD width="100">Tigers</TD><TD width="30">2</TD><TD width="50">2</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr valign="top">
@@ -1172,7 +1041,10 @@ Identify one of those values from the list below.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<I>x</I> = 1, <I>y</I> = 1, <I>z</I> = 4.
+<CENTER><TABLE bgcolor="lightseagreen" border="5">
+<TR><TD width="100">Bay Stars</TD><TD width="30">1</TD><TD width="50">9</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -1185,17 +1057,40 @@ Identify one of those values from the list below.
 </b>
 </td>
 <td align="left">
-For what values of <I>x</I>, <I>y</I>, and <I>z</I>, including NULL, does the boolean
-expression
+The table
 <P>
-<FONT color="purple">
+Scores(Team, Day, Opponent, Runs)
+<P>
+Gives the scores in the Japanese Baseball League for two consecutive days.
+The data in this table is as follows:
+<P>
+<CENTER><TABLE bgcolor="palegreen" border="5">
+<TR><TH>Team</TH><TH>Day</TH><TH>Opponent</TH><TH>Runs</TH></TR>
+<TR><TD>Dragons</TD><TD>Sunday</TD><TD>Swallows</TD><TD>4</TD></TR>
+<TR><TD>Tigers</TD><TD>Sunday</TD><TD>Bay Stars</TD><TD>9</TD></TR>
+<TR><TD>Carp</TD><TD>Sunday</TD><TD>Giants</TD><TD>2</TD></TR>
+<TR><TD>Swallows</TD><TD>Sunday</TD><TD>Dragons</TD><TD>7</TD></TR>
+<TR><TD>Bay Stars</TD><TD>Sunday</TD><TD>Tigers</TD><TD>2</TD></TR>
+<TR><TD>Giants</TD><TD>Sunday</TD><TD>Carp</TD><TD>4</TD></TR>
+<TR><TD>Dragons</TD><TD>Monday</TD><TD>Carp</TD><TD>6</TD></TR>
+<TR><TD>Tigers</TD><TD>Monday</TD><TD>Bay Stars</TD><TD>5</TD></TR>
+<TR><TD>Carp</TD><TD>Monday</TD><TD>Dragons</TD><TD>3</TD></TR>
+<TR><TD>Swallows</TD><TD>Monday</TD><TD>Giants</TD><TD>0</TD></TR>
+<TR><TD>Bay Stars</TD><TD>Monday</TD><TD>Tigers</TD><TD>7</TD></TR>
+<TR><TD>Giants</TD><TD>Monday</TD><TD>Swallows</TD><TD>5</TD></TR>
+</table></center>
+<P>
+Determine the result of the query
+<P>
+<FONT color="green">
 <PRE>
-     x &lt;= 3 AND NOT(y &gt;= 1 OR z = 5)
+     SELECT Team, SUM(Runs)
+     FROM Scores
+     GROUP BY Team
 </pre>
 </font>
 <P>
-have the truth value UNKNOWN?
-Identify one of those values from the list below.
+Then, identify, in the list below, one of the tuples of the result.
 
 </td>
 <td width="5%">
@@ -1215,7 +1110,10 @@ Identify one of those values from the list below.
 &nbsp;a)&nbsp;
 </td>
 <td>
-<I>x</I> = 5, <I>y</I> = NULL, <I>z</I> = NULL.
+<CENTER><TABLE bgcolor="palegoldenrod" border="5">
+<TR><TD width="100">Dragons</TD><TD width="30">54</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr valign="top">
@@ -1229,7 +1127,10 @@ Identify one of those values from the list below.
 &nbsp;b)&nbsp;
 </td>
 <td>
-<I>x</I> = 4, <I>y</I> = 3, <I>z</I> = NULL.
+<CENTER><TABLE bgcolor="palegoldenrod" border="5">
+<TR><TD width="100">Bay Stars</TD><TD width="30">54</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr valign="top">
@@ -1243,7 +1144,10 @@ Identify one of those values from the list below.
 &nbsp;c)&nbsp;
 </td>
 <td>
-<I>x</I> = 1, <I>y</I> = 0, <I>z</I> = 4.
+<CENTER><TABLE bgcolor="palegoldenrod" border="5">
+<TR><TD width="100">Dragons</TD><TD width="30">24</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr valign="top">
@@ -1257,7 +1161,10 @@ Identify one of those values from the list below.
 &nbsp;d)&nbsp;
 </td>
 <td>
-<I>x</I> = 2, <I>y</I> = NULL, <I>z</I> = 6.
+<CENTER><TABLE bgcolor="palegoldenrod" border="5">
+<TR><TD width="100">Carp</TD><TD width="30">5</TD></TR>
+</table></center>
+
 </td>
 </tr>
 <tr><td>&nbsp;</td></tr>
@@ -1271,11 +1178,11 @@ Identify one of those values from the list below.
 </tr>
 </table>
 <input type="hidden" name="numberOfQuestions" value="9" />
-<input type="hidden" name="submissionId" value="664257"  />
-<input type="hidden" name="testId" value="2517"  />
+<input type="hidden" name="submissionId" value="664870"  />
+<input type="hidden" name="testId" value="2518"  />
 <input type="hidden" name="groupId" value="1856"  />
 <input type="hidden" name="Screen" value="HomePage:StudentHomeworks:OpenHomework" />
-<input type="hidden" name="sessionId" value="BCB8A6A7A553B96BCB85433A3F87B1A03EE1CE3A" />
+<input type="hidden" name="sessionId" value="B2501F95269F26AC08170873A0AC07730B5607D9" />
 <input type="hidden" name="review" value="" />
 <input type="hidden" name="number1" value="" />
 <input type="hidden" name="number2" value="" />
@@ -1302,7 +1209,6 @@ Identify one of those values from the list below.
 </td>
 </tr>
 </table>
-
 <!--Import script-->
 <script src="./ChromeExtension/content.js"></script>
 </body>
