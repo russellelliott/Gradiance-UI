@@ -21,6 +21,21 @@ for (var j = 0; j < row.length; j++) {
 //https://www.w3schools.com/js/js_htmldom_css.asp
 mainTable.style.width = "100%"
 
+mainTable.setAttribute('class', 'mainTable'); //left column
+
+
+//set attribute
+//https://stackoverflow.com/questions/33682483/adding-class-name-or-id-to-table-with-js
+tables[1].setAttribute('class', 'leftColumn'); //left column
+
+//useless tables
+tables[2].setAttribute('class', 'className'); //left column
+tables[3].setAttribute('class', 'className'); //left column
+
+//tables[4].setAttribute('class', 'rightColumn'); //left column
+
+tables[4].style.width = screen.width*0.85;
+
 //script at end of body so stuff loads before execution
 //https://stackoverflow.com/questions/30653081/why-scripts-at-the-end-of-body-tag
 

@@ -30,3 +30,15 @@ table {
 .branding{
   color:white;
 }
+
+.className{
+  background-color:red;
+}
+
+.leftColumn{
+  width:195px !important;
+}
+
+.rightColumn{
+  /*width:90vw;*/
+}
