@@ -120,3 +120,25 @@ document.body.innerHTML = document.body.innerHTML.replace(/&nbsp;/g, '');
 //replace little dot
 //https://unicode-table.com/en/2022/
 //document.body.innerHTML = document.body.innerHTML.replace(/&#8226;/g, "");
+
+//find all html elements on the page inside the body tag
+let elems = document.querySelectorAll("body *");
+// get our replacement ready
+let span = "<span class='code'>" + word + "</span>";
+//loop through all the elements
+for (let x = 0; x < elems.length; x++) {
+    // for each element, 'split' by the word we're looking for, then 'join' it back with the replacement
+    //elems[x].innerHTML = elems[x].innerHTML.split(word).join(span);
+    //if(elems[x])
+    //trim
+    //https://stackoverflow.com/questions/2031085/how-can-i-check-if-string-contains-characters-whitespace-not-just-whitespace
+    //https://www.w3schools.com/jsref/jsref_trim_string.asp
+    console.log("text: ", elems[x].textContent);
+    if(elems[x].textContent.trim().length === 0){
+        console.log("empty!");
+        //if empty, remove the element
+        //https://www.w3schools.com/jsref/met_element_remove.asp
+        //elems[x].remove();
+    }
+
+}
