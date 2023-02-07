@@ -73,6 +73,12 @@ for (var i = 0; i < aTags.length; i++) {
     console.log(words);
     for(var word of words){
         if(isUpperCase(word) && words.length<20){
+            if(words[0]=="SELECT"){
+                console.log(words[0]);
+                console.log("words", words);
+                //aTags[i].setAttribute('class', 'code');
+                //break;
+            }
             /*if(words=="CREATE"){
                 aTags[i].setAttribute('class', 'code'); //code style
             }*/
