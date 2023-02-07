@@ -106,3 +106,17 @@ function Change(word) {
     }
 }
 Change('NULL'); //apply code styling to word "NULL"
+
+//remove &nbsp
+//https://stackoverflow.com/questions/35810238/how-to-remove-nbsp-by-javascript
+document.body.innerHTML = document.body.innerHTML.replace(/&nbsp;/g, '');
+
+
+//remove breaklines
+//https://www.textfixer.com/tutorials/javascript-line-breaks.php
+//https://stackoverflow.com/questions/10805125/how-to-remove-all-line-breaks-from-a-string
+//document.body.innerHTML = document.body.innerHTML.replace(/(\r\n|\n|\r)/gm, "");
+
+//replace little dot
+//https://unicode-table.com/en/2022/
+//document.body.innerHTML = document.body.innerHTML.replace(/&#8226;/g, "");
