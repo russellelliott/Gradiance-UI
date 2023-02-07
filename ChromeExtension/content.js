@@ -55,3 +55,48 @@ for (const a of document.querySelectorAll("b")) {
         //a.outerHTML += "<br> <a class = 'branding' href = 'https://github.com/russellelliott/Gradiance-UI'>Source Code</a>";
     }
 }
+
+//styling for code
+//https://stackoverflow.com/questions/3813294/how-to-get-element-by-innertext
+var aTags = document.getElementsByTagName("td");
+var searchText = "SearchingText";
+var found;
+
+//if all uppercase
+//https://futurestud.io/tutorials/check-if-a-string-is-in-lowercase-in-javascript-or-node-js
+function isUpperCase (input) {  
+    return input === String(input).toUpperCase()
+}
+
+for (var i = 0; i < aTags.length; i++) {
+    var words = aTags[i].textContent.split(" ");
+    console.log(words);
+    for(var word of words){
+        if(isUpperCase(word) && words.length<20){
+            /*if(words=="CREATE"){
+                aTags[i].setAttribute('class', 'code'); //code style
+            }*/
+            //aTags[i].setAttribute('class', 'code'); //code style
+
+        }
+    }
+  /*if (aTags[i].textContent == searchText) {
+    found = aTags[i];
+    break;
+  }*/
+}
+
+//change styling of specific word
+//https://stackoverflow.com/questions/67894682/how-to-add-style-for-specific-words-at-html-using-javascript
+function Change(word) {
+    //find all html elements on the page inside the body tag
+    let elems = document.querySelectorAll("body *");
+    // get our replacement ready
+    let span = "<span class='code'>" + word + "</span>";
+    //loop through all the elements
+    for (let x = 0; x < elems.length; x++) {
+        // for each element, 'split' by the word we're looking for, then 'join' it back with the replacement
+        elems[x].innerHTML = elems[x].innerHTML.split(word).join(span);
+    }
+}
+Change('NULL'); //apply code styling to word "NULL"
