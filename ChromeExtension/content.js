@@ -29,7 +29,7 @@ mainTable.setAttribute('class', 'mainTable'); //left column
 tables[1].setAttribute('class', 'leftColumn'); //left column
 
 //useless tables
-tables[2].setAttribute('class', 'className'); //left column
+//tables[2].setAttribute('class', 'className'); //left column
 tables[3].setAttribute('class', 'className'); //left column
 
 //tables[4].setAttribute('class', 'rightColumn'); //left column
