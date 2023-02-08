@@ -67,12 +67,15 @@ var found;
 function isUpperCase (input) {  
     return input === String(input).toUpperCase()
 }
+//sql keywords
+//https://www.w3schools.com/sql/sql_ref_keywords.asp
+var keywords = "ADD ADD CONSTRAINT ALL ALTER ALTER COLUMN ALTER TABLE AND ANY AS ASC BACKUP DATABASE BETWEEN CASE CHECK COLUMN CONSTRAINT CREATE CREATE DATABASE CREATE INDEX CREATE OR REPLACE VIEW CREATE TABLE CREATE PROCEDURE CREATE UNIQUE INDEX CREATE VIEW DATABASE DEFAULT DELETE DESC DISTINCT DROP DROP COLUMN DROP CONSTRAINT DROP DATABASE DROP DEFAULT DROP INDEX DROP TABLE DROP VIEW EXEC EXISTS FOREIGN KEY FROM FULL OUTER JOIN GROUP BY HAVING IN INDEX INNER JOIN INSERT INTO INSERT INTO SELECT IS NULL IS NOT NULL JOIN LEFT JOIN LIKE LIMIT NOT NOT NULL OR ORDER BY OUTER JOIN PRIMARY KEY PROCEDURE RIGHT JOIN ROWNUM SELECT SELECT DISTINCT SELECT INTO SELECT TOP SET TABLE TOP TRUNCATE TABLE UNION UNION ALL UNIQUE UPDATE VALUES VIEW WHERE".split(" ");
 
 for (var i = 0; i < aTags.length; i++) {
     var words = aTags[i].textContent.split(" ");
     console.log(words);
     for(var word of words){
-        if(isUpperCase(word) && words.length<20){
+        //if(isUpperCase(word) && words.length<20){
             //if(words[0]=="\nINSERT"){
             if(words[0].indexOf("INSERT")!=-1){
                 console.log(words[0]);
@@ -80,12 +83,26 @@ for (var i = 0; i < aTags.length; i++) {
                 aTags[i].setAttribute('class', 'code');
                 //break;
             }
+            for(var key of keywords){
+                if(words[0].indexOf(key)!=-1){
+                    console.log(words[0]);
+                    console.log("words", words);
+                    aTags[i].setAttribute('class', 'code');
+                    //break;
+                }
+            }
+
+            for (const a of document.querySelectorAll("p")) {
+                if (a.textContent.includes("CREATE")) {
+                    a.setAttribute('class', 'code');
+                }
+            }
             /*if(words=="CREATE"){
                 aTags[i].setAttribute('class', 'code'); //code style
             }*/
             //aTags[i].setAttribute('class', 'code'); //code style
 
-        }
+        //}
     }
   /*if (aTags[i].textContent == searchText) {
     found = aTags[i];
