@@ -113,11 +113,14 @@ for (var i = 0; i < aTags.length; i++) {
 }
 
 for (const a of document.querySelectorAll("td")) {
-    if (a.textContent.includes("&#8226;")) {
+    if(a.textContent=="&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;"){
+        a.innerText = "fdsjhgjdfk"
+    }
+    /*if (a.textContent.includes("&#8226;")) {
         //console.log(a);
         a.innerText = "aaaaaaaaa";
         //a.setAttribute('class', 'code');
-    }
+    }*/
 }
 
 //tables[3].setAttribute('class', 'className'); //left column
@@ -141,6 +144,11 @@ Change('NULL'); //apply code styling to word "NULL"
 //remove &nbsp
 //https://stackoverflow.com/questions/35810238/how-to-remove-nbsp-by-javascript
 document.body.innerHTML = document.body.innerHTML.replace(/&nbsp;/g, '');
+document.body.innerHTML = document.body.innerHTML.replace(/&#8226;/, '');
+
+//https://stackoverflow.com/questions/20856197/remove-non-ascii-character-in-string
+document.body.innerHTML = document.body.innerHTML.replace(/[\u{0080}-\u{FFFF}]/gu,"");
+
 
 
 //remove breaklines
