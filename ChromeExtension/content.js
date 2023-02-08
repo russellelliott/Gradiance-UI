@@ -31,6 +31,8 @@ tables[1].setAttribute('class', 'leftColumn'); //left column
 //useless tables
 //tables[2].setAttribute('class', 'className'); //left column
 tables[3].setAttribute('class', 'className'); //left column
+//delete annoying dots
+//https://stackoverflow.com/questions/3065342/how-do-i-iterate-through-table-rows-and-cells-in-javascript
 
 //tables[4].setAttribute('class', 'rightColumn'); //left column
 
@@ -109,6 +111,17 @@ for (var i = 0; i < aTags.length; i++) {
     break;
   }*/
 }
+
+for (const a of document.querySelectorAll("td")) {
+    if (a.textContent.includes("&#8226;")) {
+        //console.log(a);
+        a.innerText = "aaaaaaaaa";
+        //a.setAttribute('class', 'code');
+    }
+}
+
+//tables[3].setAttribute('class', 'className'); //left column
+
 
 //change styling of specific word
 //https://stackoverflow.com/questions/67894682/how-to-add-style-for-specific-words-at-html-using-javascript
