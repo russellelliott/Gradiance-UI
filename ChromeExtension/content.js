@@ -222,7 +222,7 @@ var tables = document.getElementsByTagName("table");
             let val = cell.innerText; // your code below
             console.log("cell: ", val);
             //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
-            matches = val.match(regex);
+            let matches = val.match(regex);
             console.log("matches", matches)
             if (matches == null){
                 console.log("I AM NULL STOP")
@@ -244,7 +244,7 @@ var tables = document.getElementsByTagName("table");
                         if(cell.innerHTML){
                             if(cell.innerHTML.indexOf("table")==-1){
                                 console.log("no table");
-                                cell.setAttribute('class', 'code');
+                                //cell.setAttribute('class', 'code');
                             }
                         }
                     }
@@ -259,3 +259,13 @@ var cells = document.getElementsByTagName("td");
 for(let cell of cells){
     console.log(cell.innerText);
 }*/
+
+var bodies = document.body.innerHTML;
+var matchers = bodies.match(regex);
+if(matchers){
+    //for match
+    for(let mat of matchers){
+        console.log(mat);
+        Change(mat); //apply code styling to word "NULL"
+    }
+}
