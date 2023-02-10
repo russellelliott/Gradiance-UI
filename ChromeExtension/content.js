@@ -141,6 +141,7 @@ function Change(word) {
 }
 Change('NULL'); //apply code styling to word "NULL"
 
+
 //remove &nbsp
 //https://stackoverflow.com/questions/35810238/how-to-remove-nbsp-by-javascript
 document.body.innerHTML = document.body.innerHTML.replace(/&nbsp;/g, '');
@@ -179,5 +180,82 @@ for (let x = 0; x < elems.length; x++) {
         //https://www.w3schools.com/jsref/met_element_remove.asp
         //elems[x].remove();
     }
+    /*for(i of elems[x].textContent){
+        console.log(i);
+    }*/
 
 }
+
+
+//match regex
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+const regex = /[A-Za-z0-9_,]+[(]+(([^\)]+))+[)]/g;
+
+//stuff in parenthesis
+//https://stackoverflow.com/questions/6208367/regex-to-match-stuff-between-parentheses
+
+//apply styling to stuff that looks like sql code
+let td = document.querySelectorAll("body *");
+console.log("hellow");
+for (let x = 0; x < td.length; x++) {
+    // for each element, 'split' by the word we're looking for, then 'join' it back with the replacement
+    //td[x].innerHTML = td[x].innerHTML.split(word).join(span);
+    console.log(td.innerHTML);
+    if(td.innerHTML && td.innerHTML.match(regex)){
+        td.setAttribute('class', 'code');
+    }
+}
+
+//this conveluted function does the following
+/*
+look through all tables
+if the text content of the table has text that matches to some regex and the table doesn't have a table inside, apply styling
+if we don't do the check for if there is a table, it applies the styling to all content since the site is essentially just nested tables.
+*/
+//https://stackoverflow.com/questions/3065342/how-do-i-iterate-through-table-rows-and-cells-in-javascript
+var tables = document.getElementsByTagName("table");
+    for(let table of tables){
+        for (let row of table.rows) 
+    {
+        for(let cell of row.cells) 
+        {
+            let val = cell.innerText; // your code below
+            console.log("cell: ", val);
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+            matches = val.match(regex);
+            console.log("matches", matches)
+            if (matches == null){
+                console.log("I AM NULL STOP")
+            }
+            //console.log(matches.length);
+            if(matches){
+                console.log(matches.length);
+            }
+            if(matches){
+                for(match of matches){
+                    console.log("match: ", match);
+                    if(matches!=null){
+                        //cell.setAttribute('class', 'code');
+                        console.log("give me the style");
+                        console.log(cell.innerHTML);
+                        /*if(cell.innerText && cell.innerText.innerHTML.indexOf("table")==-1){
+                            console.log("no table inside")
+                        }*/
+                        if(cell.innerHTML){
+                            if(cell.innerHTML.indexOf("table")==-1){
+                                console.log("no table");
+                                cell.setAttribute('class', 'code');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*console.log("cells begin");
+var cells = document.getElementsByTagName("td");
+for(let cell of cells){
+    console.log(cell.innerText);
+}*/
