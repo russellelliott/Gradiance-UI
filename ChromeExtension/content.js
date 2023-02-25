@@ -4,7 +4,7 @@ var tables = document.getElementsByTagName("table");
 
 //var tables = document.querySelectorAll('table');
 var mainTable = tables[0];
-console.log(mainTable.innerHTML);
+//console.log(mainTable.innerHTML);
 
 //https://www.geeksforgeeks.org/how-to-remove-column-from-html-table-using-javascript/
 // Getting the rows in table.
@@ -45,7 +45,7 @@ tables[4].style.width = screen.width*0.85;
 
 for (const a of document.querySelectorAll("b")) {
     if (a.textContent.includes("Help")) {
-        console.log(a.textContent); //get text
+        //console.log(a.textContent); //get text
         //multiline string
         //https://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
         a.outerHTML +=
@@ -78,20 +78,20 @@ for(word of keywords){
 }
 for (var i = 0; i < aTags.length; i++) {
     var words = aTags[i].textContent.split(" ");
-    console.log(words);
+    //console.log(words);
     for(var word of words){
         //if(isUpperCase(word) && words.length<20){
             //if(words[0]=="\nINSERT"){
             if(words[0].indexOf("INSERT")!=-1){
-                console.log(words[0]);
-                console.log("words", words);
+                //console.log(words[0]);
+                //console.log("words", words);
                 aTags[i].setAttribute('class', 'code');
                 //break;
             }
             for(var key of keywords){
                 if(words[0].indexOf(key)!=-1){
-                    console.log(words[0]);
-                    console.log("words", words);
+                    //console.log(words[0]);
+                    //console.log("words", words);
                     aTags[i].setAttribute('class', 'code');
                     //break;
                 }
@@ -120,7 +120,7 @@ for (const a of document.querySelectorAll("td")) {
         a.innerText = "fdsjhgjdfk"
     }
     /*if (a.textContent.includes("&#8226;")) {
-        //console.log(a);
+        ////console.log(a);
         a.innerText = "aaaaaaaaa";
         //a.setAttribute('class', 'code');
     }*/
@@ -176,15 +176,15 @@ for (let x = 0; x < elems.length; x++) {
     //trim
     //https://stackoverflow.com/questions/2031085/how-can-i-check-if-string-contains-characters-whitespace-not-just-whitespace
     //https://www.w3schools.com/jsref/jsref_trim_string.asp
-    console.log("text: ", elems[x].textContent);
+    //console.log("text: ", elems[x].textContent);
     if(elems[x].textContent.trim().length === 0){
-        console.log("empty!");
+        //console.log("empty!");
         //if empty, remove the element
         //https://www.w3schools.com/jsref/met_element_remove.asp
         //elems[x].remove();
     }
     /*for(i of elems[x].textContent){
-        console.log(i);
+        //console.log(i);
     }*/
 
 }
@@ -199,11 +199,11 @@ const regex = /[A-Za-z0-9_,]+[(]+(([^\)]+))+[)]/g;
 
 //apply styling to stuff that looks like sql code
 let td = document.querySelectorAll("body *");
-console.log("hellow");
+//console.log("hellow");
 for (let x = 0; x < td.length; x++) {
     // for each element, 'split' by the word we're looking for, then 'join' it back with the replacement
     //td[x].innerHTML = td[x].innerHTML.split(word).join(span);
-    console.log(td.innerHTML);
+    //console.log(td.innerHTML);
     if(td.innerHTML && td.innerHTML.match(regex)){
         td.setAttribute('class', 'code');
     }
@@ -223,30 +223,30 @@ var tables = document.getElementsByTagName("table");
         for(let cell of row.cells) 
         {
             let val = cell.innerText; // your code below
-            console.log("cell: ", val);
+            //console.log("cell: ", val);
             //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
             let matches = val.match(regex);
-            console.log("matches", matches)
+            //console.log("matches", matches)
             if (matches == null){
-                console.log("I AM NULL STOP")
+                //console.log("I AM NULL STOP")
             }
-            //console.log(matches.length);
+            ////console.log(matches.length);
             if(matches){
-                console.log(matches.length);
+                //console.log(matches.length);
             }
             if(matches){
                 for(match of matches){
-                    console.log("match: ", match);
+                    //console.log("match: ", match);
                     if(matches!=null){
                         //cell.setAttribute('class', 'code');
-                        console.log("give me the style");
-                        console.log(cell.innerHTML);
+                        //console.log("give me the style");
+                        //console.log(cell.innerHTML);
                         /*if(cell.innerText && cell.innerText.innerHTML.indexOf("table")==-1){
-                            console.log("no table inside")
+                            //console.log("no table inside")
                         }*/
                         if(cell.innerHTML){
                             if(cell.innerHTML.indexOf("table")==-1){
-                                console.log("no table");
+                                //console.log("no table");
                                 //cell.setAttribute('class', 'code');
                             }
                         }
@@ -257,10 +257,10 @@ var tables = document.getElementsByTagName("table");
     }
 }
 
-/*console.log("cells begin");
+/*//console.log("cells begin");
 var cells = document.getElementsByTagName("td");
 for(let cell of cells){
-    console.log(cell.innerText);
+    //console.log(cell.innerText);
 }*/
 
 var bodies = document.body.innerHTML;
@@ -268,7 +268,7 @@ var matchers = bodies.match(regex);
 if(matchers){
     //for match
     for(let mat of matchers){
-        console.log(mat);
+        //console.log(mat);
         Change(mat); //apply code styling to word "NULL"
     }
 }
